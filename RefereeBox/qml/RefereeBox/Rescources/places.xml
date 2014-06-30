@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<places>
+    <place>
+        <name>S1</name>
+        <active>true</active>
+    </place>
+
+    <place>
+        <name>S2</name>
+        <active>true</active>
+    </place>
+
+    <place>
+        <name>S3</name>
+        <active>true</active>
+    </place>
+
+    <place>
+        <name>S4</name>
+        <active>true</active>
+    </place>
+
+    <place>
+        <name>A1</name>
+        <active>true</active>
+    </place>
+
+    <place>
+        <name>A2</name>
+        <active>true</active>
+    </place>
+
+    <place>
+        <name>T1</name>
+        <active>true</active>
+    </place>
+
+    <place>
+        <name>C1</name>
+        <active>false</active>
+    </place>
+
+    <place>
+        <name>C2</name>
+        <active>false</active>
+    </place>
+
+    <place>
+        <name>C3</name>
+        <active>false</active>
+    </place>
+
+
+</places>

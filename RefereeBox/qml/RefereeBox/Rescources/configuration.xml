@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configurations>
+    <configuration>
+        <name>line</name>
+        <active>true</active>
+    </configuration>
+
+    <configuration>
+        <name>circle</name>
+        <active>false</active>
+    </configuration>
+
+</configurations>
+
