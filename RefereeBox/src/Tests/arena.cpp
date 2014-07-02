@@ -7,39 +7,60 @@
 
 
 Arena::Arena(){
-
+    numberObjectsArena_ = 0;
+    numberOfPlaceAreas_ = 0;
 }
 
 
-void Arena::generateArenaSetup(QList<QString> places, QList<QString> objects, QList<QString> configurations, QList<QString> rotations, QList<QString> orientations, int objectsPerPlace){
+void Arena::generateArenaSetup(QList<QVariant> places, QList<QString> objects, QList<QString> configurations, QList<QString> rotations, QList<QString> orientations, int objectsPerPlace){
+
 
     clearList();
 
-    if(objects.length() > 0 && configurations.length() > 0 && rotations.length() > 0 && orientations.length() > 0 ){
+    if(objects.length() >= 0 && configurations.length() > 0 && rotations.length() > 0 && orientations.length() > 0 ){
 
-        for( int pI = 0; pI < places.length(); ++pI){
+        while(0 < places.length()){
             int rdmConfiguration = rand() % configurations.length();
 
             ArenaPlace* currentPlace = new ArenaPlace();
 
+            int rdmPlace = rand() % places.length();
+
+            QMap<QString, QVariant>  qPlace = places[rdmPlace].toMap();
+
+
             currentPlace->setConfiguration(configurations[rdmConfiguration]);
-            currentPlace->setPlace(places[pI]);
+            currentPlace->setPlace(qPlace["text"].toString());
+            currentPlace->setNavigation(qPlace["navigation"].toBool());
+            currentPlace->setPickUp(qPlace["pickup"].toBool());
+            currentPlace->setPutDown(qPlace["putdown"].toBool());
 
-            for( int i = 0; i < objectsPerPlace && objects.length() > 0; ++i){
+            if(qPlace["putdown"].toBool()){
+                ++numberOfPlaceAreas_;
+            }
 
-                int rdmObject = rand() % objects.length();
-                int rdmOrientation = rand() % orientations.length();
-                int rdmRotation = rand() % rotations.length();
+            places.removeAt(rdmPlace);
 
-                ArenaObject* currentObject = new ArenaObject();
+            if(qPlace["pickup"].toBool()){
 
-                currentObject->setObject(objects[rdmObject]);
-                objects.removeAt(rdmObject);
+                for( int i = 0; i < objectsPerPlace && objects.length() >
+                     0; ++i){
 
-                currentObject->setOrientation(orientations[rdmOrientation]);
-                currentObject->setRotation(rotations[rdmRotation]);
+                    int rdmObject = rand() % objects.length();
+                    int rdmOrientation = rand() % orientations.length();
+                    int rdmRotation = rand() % rotations.length();
 
-                currentPlace->append(currentObject);
+                    ArenaObject* currentObject = new ArenaObject();
+
+                    currentObject->setObject(objects[rdmObject]);
+                    objects.removeAt(rdmObject);
+
+                    currentObject->setOrientation(orientations[rdmOrientation]);
+                    currentObject->setRotation(rotations[rdmRotation]);
+
+                    currentPlace->append(currentObject);
+                    ++numberObjectsArena_;
+                }
             }
 
             addItem(currentPlace);
@@ -112,10 +133,17 @@ void Arena::addItem(ArenaPlace* arenaPlace){
 
 void Arena::clearList(){
     beginRemoveRows(QModelIndex(), 0, rowCount());
-
+    numberObjectsArena_ = 0;
+    numberOfPlaceAreas_ = 0;
     arenaSetup_.clear();
     endRemoveRows();
 }
+int Arena::numberObjectsArena() const
+{
+    return numberObjectsArena_;
+}
+
+
 
 int Arena::rowCount(const QModelIndex & parent) const {
     Q_UNUSED(parent);
@@ -138,6 +166,12 @@ QVariant Arena::data(const QModelIndex & index, int role) const {
         return arenaPlace->getOrientations();
     else if (role == RotationsRole)
         return arenaPlace->getRotations();
+    else if (role == NavigationRole)
+        return arenaPlace->getNavigation();
+    else if (role == PickUpRole)
+        return arenaPlace->getPickUp();
+    else if (role == PutDownRole)
+        return arenaPlace->getPutDown();
 
 
     return QVariant();
@@ -150,5 +184,17 @@ QHash<int, QByteArray> Arena::roleNames() const {
     roles[ObjectsRole] = "objectsModel";
     roles[OrientationsRole] = "orientations";
     roles[RotationsRole] = "rotations";
+    roles[PickUpRole] = "pickup";
+    roles[PutDownRole] = "putdown";
+    roles[NavigationRole] = "navigation";
+
     return roles;
+}
+
+QList<ArenaPlace*> Arena::getArenaSetup(){
+    return arenaSetup_;
+}
+
+int Arena::numberOfPlaceAreas() const {
+    return numberOfPlaceAreas_;
 }

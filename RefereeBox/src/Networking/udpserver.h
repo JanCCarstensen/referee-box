@@ -19,6 +19,7 @@ public:
 private slots:
     void readPendingDatagrams();
     void broadcastKeepalive();
+    void sendTaskSepc(QString taskSpec);
 
 private:
     QUdpSocket *udpSocket;

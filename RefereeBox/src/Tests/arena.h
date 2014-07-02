@@ -25,7 +25,10 @@ public:
         ConfigurationRole,
         ObjectsRole,
         RotationsRole,
-        OrientationsRole
+        OrientationsRole,
+        NavigationRole,
+        PutDownRole,
+        PickUpRole
     };
 
 
@@ -36,9 +39,15 @@ public:
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 
 
+    QList<ArenaPlace*> getArenaSetup();
+
+
+    int numberObjectsArena() const;
+    int numberOfPlaceAreas() const;
+
 public slots:
 
-    void generateArenaSetup(QList<QString> places, QList<QString> objects, QList<QString> configurations, QList<QString> rotations, QList<QString> orientations, int objectsPerPlace);
+    void generateArenaSetup(QList<QVariant> places, QList<QString> objects, QList<QString> configurations, QList<QString> rotations, QList<QString> orientations, int objectsPerPlace);
     QString getObject(QString place, int index);
     QString getRotation(QString place, int index);
     QString getOrientation(QString place, int index);
@@ -53,7 +62,8 @@ private:
 
     void clearList();
 
-
+    int numberObjectsArena_;
+    int numberOfPlaceAreas_;
     QList<ArenaPlace*> arenaSetup_;
 
 protected:

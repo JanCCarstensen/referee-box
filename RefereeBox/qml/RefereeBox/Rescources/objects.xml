@@ -3,55 +3,55 @@
     <object>
         <name>F_20_B</name>
         <active>true</active>
-        <count>2</count>
+        <quantity>2</quantity>
     </object>
 
     <object>
         <name>F_20_G</name>
         <active>true</active>
-        <count>2</count>
+        <quantity>2</quantity>
     </object>
 
     <object>
         <name>S_40_B</name>
         <active>true</active>
-        <count>2</count>
+        <quantity>2</quantity>
     </object>
 
     <object>
         <name>S_40_G</name>
         <active>true</active>
-        <count>2</count>
+        <quantity>2</quantity>
     </object>
 
     <object>
         <name>R_20</name>
         <active>true</active>
-        <count>2</count>
+        <quantity>2</quantity>
     </object>
 
     <object>
         <name>V_20</name>
         <active>true</active>
-        <count>2</count>
+        <quantity>2</quantity>
     </object>
 
     <object>
         <name>M_20</name>
         <active>true</active>
-        <count>2</count>
+        <quantity>2</quantity>
     </object>
 
     <object>
         <name>M_30</name>
         <active>true</active>
-        <count>2</count>
+        <quantity>2</quantity>
     </object>
 
     <object>
         <name>M_20_100</name>
         <active>true</active>
-        <count>2</count>
+        <quantity>2</quantity>
     </object>
 
 </objects>

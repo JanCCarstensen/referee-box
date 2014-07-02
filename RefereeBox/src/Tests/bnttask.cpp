@@ -2,19 +2,22 @@
 
 #include <QDebug>
 #include <cstdlib>
+#include "arenaobject.h"
 
 
-BNTTask::BNTTask(QObject *parent): QAbstractListModel(parent){
+BNTTask::BNTTask(Arena* arena, QObject *parent): QAbstractListModel(parent){
 
     connect( this, SIGNAL( addBNTRequest(BNTItem*) ), this, SLOT( doAddItem(BNTItem*)) ) ;
     connect( this, SIGNAL( removeBNTRequest(BNTItem*) ), this, SLOT( doRemoveItem(BNTItem*)) ) ;
 
+    arena_ = arena;
     selectedItem_ = -1;
 }
 
 
 void BNTTask::doAddItem(BNTItem* bntItem){
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
+    qDebug() << "add" << rowCount() << bntItem->getPlace() << bntItem->getOrientation();
     bntItemList_.append(bntItem);
     endInsertRows();
 }
@@ -38,18 +41,20 @@ void BNTTask::doAddEmtpyItem(){
     endInsertRows();
 }
 
-
 void BNTTask::doRemoveItem(int index){
     beginRemoveRows(QModelIndex(), index, index);
     delete bntItemList_[index];
     bntItemList_.removeAt(index);
+
     endRemoveRows();
 }
 
 void BNTTask::updateData(int index, QString place, QString orientation){
-    bntItemList_[index]->setOrientation(orientation);
-    bntItemList_[index]->setPlace(place);
-
+    if(index < bntItemList_.length() && index >= 0){
+        qDebug() << index << place << orientation;
+        bntItemList_[index]->setOrientation(orientation);
+        bntItemList_[index]->setPlace(place);
+    }
 }
 
 int BNTTask::rowCount(const QModelIndex & parent) const {
@@ -84,23 +89,39 @@ QString BNTTask::getItemPlace(int index){
 }
 
 QString BNTTask::getItemOrientation(int index){
-    return bntItemList_[index]->getOrientation();
+    if(index < bntItemList_.length()){
+        return bntItemList_[index]->getOrientation();
+    } else {
+        return "";
+    }
+
 }
 
-QString BNTTask::autogenerateBNT(int numberOfPlaces, QList<QString> places, QList<QString> orientations){
+QString BNTTask::autogenerateBNT(int numberOfPlaces, QList<QString> orientations){
 
     clearList();
+
+    QList<QString> places;
+
+    foreach(ArenaPlace* tmpPlace ,arena_->getArenaSetup()){
+        if(tmpPlace->getNavigation()){
+            places.append(tmpPlace->getPlace());
+        }
+    }
+
 
     if(places.length() > 0 && orientations.length() > 0){
 
         for(int i= 0; i < numberOfPlaces; ++i){
 
-            int randomPlaceNum = rand() % places.length();
-            int randomOrientationNum = rand() % orientations.length();
+            if(places.length() > 0){
+                int randomPlaceNum = rand() % places.length();
+                int randomOrientationNum = rand() % orientations.length();
 
-            doAddItem(new BNTItem(places[randomPlaceNum], orientations[randomOrientationNum]));
+                doAddItem(new BNTItem(places[randomPlaceNum], orientations[randomOrientationNum]));
 
-            places.removeAt(randomPlaceNum);
+                places.removeAt(randomPlaceNum);
+            }
 
         }
 
@@ -111,10 +132,12 @@ QString BNTTask::autogenerateBNT(int numberOfPlaces, QList<QString> places, QLis
 
 
 void BNTTask::clearList(){
-    beginRemoveRows(QModelIndex(), 0, bntItemList_.length());
+//    beginRemoveRows(QModelIndex(), 0, bntItemList_.length());
+    beginResetModel();
     qDeleteAll(bntItemList_);
     bntItemList_.clear();
-    endRemoveRows();
+//    endRemoveRows();
+    endResetModel();
 }
 
 void BNTTask::itemSelected(int id){

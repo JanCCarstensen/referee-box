@@ -31,7 +31,7 @@ Item {
         anchors.topMargin: 5
 
         delegate: BMTItemDelegate{
-            objectsModel: objectsModelData
+            objectsModel: objectsModelData.modelid
         }
 
         model: bmtTaskList
@@ -116,11 +116,35 @@ Item {
 
         Button{
             anchors.top: addTaskElement.bottom
+            id: compose
             text: "Compose"
 
             onClicked: {
 
                newText(bmtTaskList.composeBMTTaskSpec())
+
+
+            }
+
+        }
+
+        ComboBox{
+            anchors.top: compose.bottom
+            id: numOfSamples
+            editable: true
+            model: 10;
+            currentIndex: 1
+            validator: IntValidator {bottom: 1; top: 10;}
+        }
+
+
+        Button{
+            anchors.top: numOfSamples.bottom
+            text: "Compose"
+
+            onClicked: {
+
+               newText(bmtTaskList.generateBMTTaskSpec(numOfSamples.editText))
 
 
             }

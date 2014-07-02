@@ -5,6 +5,9 @@ Rectangle {
 
     property string placeName;
     property string placeConfiguration;
+    property string placeNavigation;
+    property string placePickUp;
+    property string placePutDown;
     property ListModel objectsDataModel;
 
     ListModel{
@@ -55,49 +58,19 @@ Rectangle {
 
             }
 
+            Text{
+                text: placeNavigation
+            }
+
+            Text{
+                text: placePickUp
+            }
+
+            Text{
+                text: placePutDown
+            }
+
         }
-
-//        GridView{
-//            height: parent.height * 0.8
-
-//            model: objectsDataModel
-
-//            contentHeight:  60
-//            contentWidth:  60
-
-
-//            delegate:  Rectangle{
-
-//                Column{
-
-//                    anchors.fill: parent
-
-//                    Image {
-//                        height: parent.height * 0.8
-//                        fillMode: Image.PreserveAspectFit
-//                        source: "../Rescources/Objects/"+object+".png"
-
-//                    }
-//                    Text{
-//                        text: object
-
-//                    }
-//                    Text{
-//                        text: orientation
-
-//                    }
-//                    Text{
-//                        text: rotation
-
-//                    }
-//                }
-
-//            }
-
-
-
-//        }
-
 
         Row{
 
@@ -121,24 +94,10 @@ Rectangle {
                     height: 60
                     width: 60
                     fillMode: Image.PreserveAspectFit
-//                    source: "../Rescources/Objects/"+firstItem.object+".png"
                     source: firstItem.objectPath
                     transform: Rotation { origin.x: 30; origin.y: 30; angle: firstItem.rotation}
 
                 }
-
-
-//                ToolTip {
-//                    id: toolTip
-//                    text: "ToolTip"
-//                    target: rectangle
-//                    visible: mouseArea.pressed
-//                }
-
-//                MouseArea {
-//                    id: mouseArea
-//                    anchors.fill: parent
-//                }
 
                 Text{
                     text: firstItem.object

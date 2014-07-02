@@ -3,13 +3,14 @@
 
 #include <QAbstractListModel>
 #include "bmtitem.h"
+#include "arena.h"
 
 class BMTTask: public QAbstractListModel{
 
     Q_OBJECT
 
 public:
-    BMTTask(QString taskType);
+    BMTTask(QString taskType, Arena* arena);
 
     enum BMTRoles {
         SourceRole = Qt::UserRole + 1,
@@ -48,6 +49,10 @@ public slots:
     QString composeCBTTaskSpec();
     QString composePPTTaskSpec();
 
+    QString generateBMTTaskSpec(int numOfSamples);
+    QString generateBTTTaskSpec();
+    QString generateCBTTaskSpec();
+    QString generatePPTTaskSpec();
 
     void updateData(int index, QString source, QString sourceType, QString object, QString destination, QString destinationType);
     void updateObect(int index, QString object);
@@ -74,6 +79,9 @@ protected:
 
 private:
 
+   void clearList();
+
+   Arena* arena_;
    QList<BMTItem*> bmtItemList_;
    int selectedItem_;
    QString taskType_;

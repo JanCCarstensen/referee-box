@@ -26,6 +26,21 @@ Rectangle {
 
         model: placesModelData.modelid
 
+        header:Component{
+            Row{
+                Text{
+                    text: "   N     "
+                }
+                Text{
+                    text: "PU    "
+                }
+                Text{
+                    text: "PD     "
+                }
+
+            }
+        }
+
         delegate: Item{
 
                 x: 10
@@ -37,18 +52,53 @@ Rectangle {
                     spacing: 10
 
                     CheckBox{
-                          text: place
 
-                          checked: active == "true" ? true : false
+
+                          checked: navigation == "true" ? true : false
 
                           onClicked:  {
-                              if(active == "true"){
-                                  placesModelData.modelid.setProperty(index, "active", "false");
+                              if(navigation == "true"){
+                                  placesModelData.modelid.setProperty(index, "navigation", "false");
                               }else{
-                                  placesModelData.modelid.setProperty(index, "active", "true");
+                                  placesModelData.modelid.setProperty(index, "navigation", "true");
 
                               }
                           }
+                    }
+
+                    CheckBox{
+
+
+                          checked: pickup == "true" ? true : false
+
+                          onClicked:  {
+                              if(pickup == "true"){
+                                  placesModelData.modelid.setProperty(index, "pickup", "false");
+                              }else{
+                                  placesModelData.modelid.setProperty(index, "pickup", "true");
+
+                              }
+                          }
+                    }
+
+                    CheckBox{
+
+
+                          checked: putdown == "true" ? true : false
+
+                          onClicked:  {
+                              if(putdown == "true"){
+                                  placesModelData.modelid.setProperty(index, "putdown", "false");
+                              }else{
+                                  placesModelData.modelid.setProperty(index, "putdown", "true");
+
+                              }
+                          }
+                    }
+
+                    Text{
+                         text: placesModelData.modelid.get(index).text
+
                     }
 
                 }
@@ -99,16 +149,16 @@ Rectangle {
                         editable: true
                         model: 10;
 
-                        currentIndex: count + 2;
+                        currentIndex: quantity;
 
-                        onCurrentIndexChanged: objectsModelData.modelid.setProperty(index, "count", currentIndex);
+                        onCurrentIndexChanged: objectsModelData.modelid.setProperty(index, "quantity", currentIndex);
 
 
                         validator: IntValidator {bottom: 1; top: 10;}
                     }
 
                     Text{
-                        text: object
+                        text: objectsModelData.modelid.get(index).text
                     }
 
 

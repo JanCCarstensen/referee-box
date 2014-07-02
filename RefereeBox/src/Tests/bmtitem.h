@@ -7,6 +7,7 @@ class BMTItem{
 
 public:
     BMTItem();
+    BMTItem(QString source, QString sourceType, QString object, QString destination, QString destinationType);
 
     bool operator==(BMTItem other) const;
 

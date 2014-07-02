@@ -41,6 +41,10 @@ Rectangle {
             placeConfiguration: configuration
             placeName: place
 
+            placeNavigation: navigation == "true" ? "N " : "";
+            placePickUp: pickup == "true" ? "PU " : "";
+            placePutDown: putdown == "true" ? "PD" : "";
+
             objectsDataModel: setObjectsModel(objectsModel, orientations, rotations)
 
 

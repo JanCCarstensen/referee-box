@@ -4,6 +4,7 @@
 
 #include <QAbstractListModel>
 #include "bntitem.h"
+#include "arena.h"
 
 class BNTTask : public QAbstractListModel{
 
@@ -18,7 +19,7 @@ public:
     };
 
 
-    BNTTask(QObject *parent = 0);
+    BNTTask(Arena* arena, QObject *parent = 0);
 
     void addItem(BNTItem* bntItem);
     void removeItem(BNTItem* bntItem);
@@ -43,7 +44,7 @@ public slots:
     QString composeTaskSpec();
     void updateData(int index, QString place, QString orientation);
 
-    QString autogenerateBNT(int numberOfPlaces, QList<QString> places, QList<QString> orientations);
+    QString autogenerateBNT(int numberOfPlaces, QList<QString> orientations);
 
     QString getItemPlace(int index);
     int getItemPlaceIndex(int index, QList<QString> places);
@@ -66,6 +67,7 @@ private:
 
    QList<BNTItem*> bntItemList_;
    int selectedItem_;
+   Arena* arena_;
 };
 
 #endif // BNTTASK_H

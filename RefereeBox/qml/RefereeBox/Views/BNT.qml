@@ -41,7 +41,7 @@ Item {
         anchors.topMargin: 5
 
         delegate: BNTItemDelegate{
-            placesModel: placesModelData
+            placesModel: placesModelData.modelid
             orientationsModel: orientationsModelData
         }
 
@@ -103,7 +103,7 @@ Item {
             text: "Auto generate"
 
             onClicked: {
-                newText(bntTaskList.autogenerateBNT(numOfSamples.editText, convertToList(placesModelData), convertToList(orientationsModelData)))
+                newText(bntTaskList.autogenerateBNT(numOfSamples.editText, orientationsModelData.convertToList()))
             }
 
         }

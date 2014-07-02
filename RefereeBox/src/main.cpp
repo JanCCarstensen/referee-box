@@ -37,19 +37,19 @@ int main(int argc, char *argv[])
     Arena arena;
     viewer.rootContext()->setContextProperty("arena", &arena);
 
-    BNTTask bntTask;
+    BNTTask bntTask(&arena);
     viewer.rootContext()->setContextProperty("bntTaskList", &bntTask);
 
-    BMTTask bmtTask("BMT");
+    BMTTask bmtTask("BMT", &arena);
     viewer.rootContext()->setContextProperty("bmtTaskList", &bmtTask);
 
-    BMTTask bttTask("BTT");
+    BMTTask bttTask("BTT", &arena);
     viewer.rootContext()->setContextProperty("bttTaskList", &bttTask);
 
-    BMTTask cbtTask("CBT");
+    BMTTask cbtTask("CBT", &arena);
     viewer.rootContext()->setContextProperty("cbtTaskList", &cbtTask);
 
-    BMTTask pptTask("PPT");
+    BMTTask pptTask("PPT", &arena);
     viewer.rootContext()->setContextProperty("pptTaskList", &pptTask);
 
     Networking* networking = new Networking(&deviceList);

@@ -5,6 +5,14 @@ BMTItem::BMTItem(){
 
 }
 
+BMTItem::BMTItem(QString source, QString sourceType, QString object, QString destination, QString destinationType){
+    source_ = source;
+    sourceType_ = sourceType;
+    object_ = object;
+    destination_ = destination;
+    desitnationType_ = destinationType;
+}
+
 bool BMTItem::operator==(BMTItem other) const{
 
    if (desitnationType() == other.desitnationType() &&

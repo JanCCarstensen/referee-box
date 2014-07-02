@@ -90,13 +90,44 @@ QVariant ArenaPlace::data(const QModelIndex & index, int role) const {
         return arenaObject->rotation();
     else if (role == OrientationRole)
         return arenaObject->orientation();
-    return QVariant();
+
 }
+bool ArenaPlace::getNavigation() const
+{
+    return navigation;
+}
+
+void ArenaPlace::setNavigation(bool value)
+{
+    navigation = value;
+}
+bool ArenaPlace::getPickUp() const
+{
+    return pickUp;
+}
+
+void ArenaPlace::setPickUp(bool value)
+{
+    pickUp = value;
+}
+bool ArenaPlace::getPutDown() const
+{
+    return putDown;
+}
+
+void ArenaPlace::setPutDown(bool value)
+{
+    putDown = value;
+}
+
+
+
 
 QHash<int, QByteArray> ArenaPlace::roleNames() const {
     QHash<int, QByteArray> roles;
     roles[ObjectRole] = "object";
     roles[RotationRole] = "rotation";
     roles[OrientationRole] = "orientation";
+
     return roles;
 }

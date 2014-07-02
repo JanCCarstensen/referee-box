@@ -6,13 +6,13 @@ Item {
 
     id: bntItemDelegate
 
-    property XmlListModel placesModel;
+    property ListModel placesModel;
     property XmlListModel orientationsModel;
 
-    function convertToList(model){
+    function convertToListOrientation(model){
         var list = [];
         for(var i = 0; i < model.count; i++) {
-            list.push(model.get(i).text);
+            list.push(model.get(i).orientation);
         }
         return list;
     }
@@ -22,24 +22,26 @@ Item {
         ComboBox {
             id: comboPlace
 
-            currentIndex: bntTaskList.getItemPlaceIndex(index, convertToList(placesModel))
+            currentIndex: bntTaskList.getItemPlaceIndex(index, placesModelData.convertToListPlaces())
 
             editable: true
 
             model: placesModel
 
-            onEditTextChanged: bntTaskList.updateData(index, comboPlace.editText, comboObject.editText)
+            onEditTextChanged:  bntTaskList.updateData(index, comboPlace.editText, comboObject.editText)
+
          }
 
         ComboBox {
             id: comboObject
 
-            currentIndex: bntTaskList.getItemOrientationIndex(index, convertToList(orientationsModel))
+            currentIndex: bntTaskList.getItemOrientationIndex(index, convertToListOrientation(orientationsModel))
 
             editable: true
             model: orientationsModel
 
             onEditTextChanged: bntTaskList.updateData(index, comboPlace.editText, comboObject.editText)
+
 
          }
 

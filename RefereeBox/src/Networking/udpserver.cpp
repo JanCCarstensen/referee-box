@@ -45,6 +45,13 @@ void UDPServer::broadcastKeepalive(){
     QTimer::singleShot(5000, this, SLOT(broadcastKeepalive()));
 }
 
+void UDPServer::sendTaskSepc(QString taskSpec){
+    QByteArray Data;
+    Data.append(taskSpec);
+    udpSocket->writeDatagram(Data, QHostAddress::Broadcast, port);
+    qDebug() << "Broadcasting: " << taskSpec;
+}
+
 QString UDPServer::getLocalIPAdress(){
     QString ipAddress;
     QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();

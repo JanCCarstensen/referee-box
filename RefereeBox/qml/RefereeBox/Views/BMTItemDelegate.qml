@@ -6,12 +6,14 @@ Item {
 
     id: bmtItemDelegate
 
-    property XmlListModel objectsModel;
+    property ListModel objectsModel;
 
     Row {
         spacing: 10
         ComboBox {
             id: comboObject
+
+            currentIndex: bmtTaskList.getItemPlaceIndex(index, objectsModel.convertToListSingle())
 
             editable: true
             model: objectsModel

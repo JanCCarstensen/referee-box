@@ -45,10 +45,22 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 
+    bool getNavigation() const;
+    void setNavigation(bool value);
+
+    bool getPickUp() const;
+    void setPickUp(bool value);
+
+    bool getPutDown() const;
+    void setPutDown(bool value);
+
 private:
 
     QString place_;
     QString configuration_;
+    bool navigation;
+    bool pickUp;
+    bool putDown;
     QList<ArenaObject*> objects_;
 
 protected:

@@ -11,10 +11,18 @@ Item{
         var list = [];
         for(var i = 0; i < objectsModelData.count; i++) {
             if(objectsModelData.get(i).active === "true"){
-                for(var c = 0; c < objectsModelData.get(i).count; c++){
-                    list.push(objectsModelData.get(i).object);
+                for(var c = 0; c < objectsModelData.get(i).quantity; c++){
+                    list.push(objectsModelData.get(i).text);
                 }
             }
+        }
+        return list;
+    }
+
+    function convertToListSingle(){
+        var list = [];
+        for(var i = 0; i < objectsModelData.count; i++) {
+              list.push(objectsModelData.get(i).text);
         }
         return list;
     }
@@ -32,7 +40,7 @@ Item{
 
         XmlRole { name: "object"; query: "name/string()" }
         XmlRole { name: "active"; query: "active/string()" }
-        XmlRole { name: "count"; query: "count/number()" }
+        XmlRole { name: "quantity"; query: "quantity/number()" }
 
         onStatusChanged: {
 
@@ -40,7 +48,7 @@ Item{
 
                 for (var i=0; i<count; i++) {
                     var item = get(i)
-                    objectsModelData.append({object: item.object, active: item.active, count: item.count})
+                    objectsModelData.append({text: item.object, active: item.active, quantity: item.quantity})
                 }
 
                 console.log ("objectsModel - Ready");
