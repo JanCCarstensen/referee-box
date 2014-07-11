@@ -8,7 +8,7 @@ Install:
 
 2) Compile
 
-git clone https://github.com/JanCCarstensen/referee-box.git
+git clone https://github.com/JanCCarstensen/referee-box.git 
 cd referee-box/RefereeBox
 qmake
 make
