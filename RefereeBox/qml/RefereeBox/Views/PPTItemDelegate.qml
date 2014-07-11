@@ -6,7 +6,7 @@ Item {
 
     id: pptItemDelegate
 
-    property XmlListModel objectsModel;
+    property ListModel objectsModel;
 
     Row {
         spacing: 10
@@ -14,8 +14,9 @@ Item {
             id: comboObject
 
             editable: true
-            model: objectsModel
+            model: objectsModelData.convertToListSingle()
 
+            currentIndex: pptTaskList.getItemObjectIndex(index, objectsModelData.convertToListSingle())
             onEditTextChanged: pptTaskList.updateObect(index, comboObject.editText)
          }
 

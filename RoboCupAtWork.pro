@@ -1,5 +1,4 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    RefereeBox \
-    PublicViewer
+    RefereeBox

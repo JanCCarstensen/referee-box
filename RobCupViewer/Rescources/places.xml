@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<places>
+    <place>
+        <name>S1</name>
+        <navigation>true</navigation>
+        <pickup>true</pickup>
+        <putdown>true</putdown>
+    </place>
+
+    <place>
+        <name>S2</name>
+        <navigation>true</navigation>
+        <pickup>true</pickup>
+        <putdown>true</putdown>
+    </place>
+
+    <place>
+        <name>S3</name>
+        <navigation>true</navigation>
+        <pickup>true</pickup>
+        <putdown>true</putdown>
+    </place>
+
+    <place>
+        <name>S4</name>
+        <navigation>true</navigation>
+        <pickup>true</pickup>
+        <putdown>true</putdown>
+    </place>
+
+    <place>
+        <name>A1</name>
+        <navigation>true</navigation>
+        <pickup>true</pickup>
+        <putdown>true</putdown>
+    </place>
+
+    <place>
+        <name>A2</name>
+        <navigation>true</navigation>
+        <pickup>true</pickup>
+        <putdown>true</putdown>
+    </place>
+
+    <place>
+        <name>T1</name>
+        <navigation>true</navigation>
+        <pickup>true</pickup>
+        <putdown>true</putdown>
+    </place>
+
+    <place>
+        <name>C1</name>
+        <navigation>true</navigation>
+        <pickup>true</pickup>
+        <putdown>true</putdown>
+    </place>
+
+    <place>
+        <name>C2</name>
+        <navigation>true</navigation>
+        <pickup>true</pickup>
+        <putdown>true</putdown>
+    </place>
+
+    <place>
+        <name>C3</name>
+        <navigation>true</navigation>
+        <pickup>true</pickup>
+        <putdown>true</putdown>
+    </place>
+
+
+</places>

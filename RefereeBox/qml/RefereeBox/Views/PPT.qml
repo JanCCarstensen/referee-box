@@ -30,7 +30,7 @@ Item {
         anchors.topMargin: 5
 
         delegate: PPTItemDelegate{
-            objectsModel: objectsModelData
+            objectsModel: objectsModelData.modelid
         }
 
         model: pptTaskList
@@ -56,7 +56,7 @@ Item {
             ComboBox {
                 id: comboSource
                 editable: true
-                model: placesModelData
+                model: placesModelData.convertToListPlaces()
                 onEditTextChanged: pptTaskList.updateStartPosition(comboSource.editText)
             }
         }
@@ -72,7 +72,7 @@ Item {
             ComboBox {
                 id: comboDestination
                 editable: true
-                model: placesModelData
+                model: placesModelData.convertToListPlaces()
 
                 onEditTextChanged: pptTaskList.updateEndPosition(comboDestination.editText)
             }
@@ -94,11 +94,36 @@ Item {
         Button{
             anchors.top: addTaskElement.bottom
             text: "Compose"
+            id: compose
 
             onClicked: {
 
                newText(pptTaskList.composePPTTaskSpec())
 
+
+            }
+
+        }
+
+        ComboBox{
+            anchors.top: compose.bottom
+            id: numOfSamples
+            editable: true
+            model: 10;
+            currentIndex: 1
+            validator: IntValidator {bottom: 1; top: 10;}
+        }
+
+
+        Button{
+            anchors.top: numOfSamples.bottom
+            text: "Auto generate"
+
+            onClicked: {
+
+               newText(pptTaskList.generatePPTTaskSpec(numOfSamples.editText))
+               comboSource.currentIndex = pptTaskList.getItemStartPos(placesModelData.convertToListPlaces())
+               comboDestination.currentIndex = pptTaskList.getItemEndPos(placesModelData.convertToListPlaces())
 
             }
 

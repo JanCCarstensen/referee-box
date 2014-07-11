@@ -56,8 +56,10 @@ Item {
 
             ComboBox {
                 id: comboSource
+
+
                 editable: true
-                model: placesModelData
+                model: placesModelData.convertToListPlaces()
                 onEditTextChanged: bmtTaskList.updateAllSource(comboSource.editText)
             }
         }
@@ -70,10 +72,13 @@ Item {
                 text: "Destination: "
             }
 
+
             ComboBox {
                 id: comboDestination
                 editable: true
-                model: placesModelData
+                model: placesModelData.convertToListPlaces()
+
+
 
                 onEditTextChanged: bmtTaskList.updateAllDestination(comboDestination.editText)
             }
@@ -92,7 +97,7 @@ Item {
                 id: comboConfig
 
                 editable: true
-                model: configurationModel
+                model: configurationModel.convertToList()
 
                 onEditTextChanged: bmtTaskList.updateAllDestinationType(comboConfig.editText)
             }
@@ -140,12 +145,13 @@ Item {
 
         Button{
             anchors.top: numOfSamples.bottom
-            text: "Compose"
+            text: "Auto generate"
 
             onClicked: {
 
                newText(bmtTaskList.generateBMTTaskSpec(numOfSamples.editText))
-
+               comboDestination.currentIndex = bmtTaskList.getItemEndPos(placesModelData.convertToListPlaces())
+               comboSource.currentIndex = bmtTaskList.getItemStartPos(placesModelData.convertToListPlaces())
 
             }
 

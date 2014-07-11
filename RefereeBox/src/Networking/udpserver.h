@@ -16,10 +16,13 @@ public:
     explicit UDPServer(QObject *parent = 0);
     void run();
 
+public slots:
+     void sendTaskSepc(QString taskSpec);
+
 private slots:
     void readPendingDatagrams();
     void broadcastKeepalive();
-    void sendTaskSepc(QString taskSpec);
+
 
 private:
     QUdpSocket *udpSocket;

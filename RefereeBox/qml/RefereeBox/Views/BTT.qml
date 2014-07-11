@@ -31,8 +31,8 @@ Item {
         anchors.topMargin: 5
 
         delegate: BTTItemDelegate{
-            objectsModel: objectsModelData
-            placesModel: placesModelData
+            objectsModel: objectsModelData.modelid
+            placesModel: placesModelData.modelid
         }
 
         model: bttTaskList
@@ -58,7 +58,7 @@ Item {
             ComboBox {
                 id: comboStart
                 editable: true
-                model: placesModelData
+                model: placesModelData.convertToListPlaces()
                 onEditTextChanged: bttTaskList.updateStartPosition(comboStart.editText)
             }
         }
@@ -74,37 +74,11 @@ Item {
             ComboBox {
                 id: comboEnd
                 editable: true
-                model: placesModelData
+                model: placesModelData.convertToListPlaces()
 
                 onEditTextChanged: bttTaskList.updateEndPosition(comboEnd.editText)
             }
         }
-
-//        Row{
-//            id: configurationRow
-//            anchors.top: destinationRow.bottom
-//            Label {
-//                id: configurationText
-
-//                text: "Configuration: "
-//            }
-
-//            ComboBox {
-//                id: comboConfig
-
-//                editable: true
-//                model: configurationModel
-
-//                onEditTextChanged: {
-//                    bttTaskList.updateAllSourceType(comboConfig.editText)
-//                    bttTaskList.updateAllDestinationType(comboConfig.editText)
-//                }
-//            }
-
-//        }
-
-
-
 
         Button{
             anchors.top: destinationRow.bottom
@@ -119,6 +93,7 @@ Item {
 
 
         Button{
+            id: compose
             anchors.top: addTaskElement.bottom
             text: "Compose"
 
@@ -126,6 +101,34 @@ Item {
 
                newText(bttTaskList.composeBTTTaskSpec())
 
+
+            }
+
+        }
+
+        ComboBox{
+            anchors.top: compose.bottom
+            id: numOfSamples
+            editable: true
+            model: 10;
+            currentIndex: 1
+            validator: IntValidator {bottom: 1; top: 10;}
+        }
+
+
+
+
+
+        Button{
+            anchors.top: numOfSamples.bottom
+            text: "Auto generate"
+
+            onClicked: {
+
+               newText(bttTaskList.generateBTTTaskSpec(numOfSamples.editText))
+
+                comboStart.currentIndex = bttTaskList.getItemEndPos(placesModelData.convertToListPlaces())
+                comboEnd.currentIndex = bttTaskList.getItemStartPos(placesModelData.convertToListPlaces())
 
             }
 

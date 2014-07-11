@@ -56,13 +56,16 @@ void BMTTask::updateData(int index, QString source, QString sourceType, QString 
 }
 
 void BMTTask::updateObect(int index, QString object){
-    bmtItemList_[index]->setObject(object);
+    if(index < bmtItemList_.length() && index >= 0){
+        bmtItemList_[index]->setObject(object);
+    }
 }
 
 void BMTTask::updateAllSource(QString source){
     for(int i = 0; i < bmtItemList_.length(); ++i){
         bmtItemList_[i]->setSource(source);
     }
+    startPos_ = source;
 }
 
 void BMTTask::updateAllSourceType(QString sourceType){
@@ -75,6 +78,7 @@ void BMTTask::updateAllDestination(QString destination){
     for(int i = 0; i < bmtItemList_.length(); ++i){
         bmtItemList_[i]->setDestination(destination);
     }
+    endPos_ = destination;
 }
 
 void BMTTask::updateAllDestinationType(QString destinationType){
@@ -84,9 +88,11 @@ void BMTTask::updateAllDestinationType(QString destinationType){
 }
 
 void BMTTask::updateObect(int index, QString source, QString object, QString destination){
-    bmtItemList_[index]->setSource(source);
-    bmtItemList_[index]->setObject(object);
-    bmtItemList_[index]->setDestination(destination);
+    if(index > 0){
+        bmtItemList_[index]->setSource(source);
+        bmtItemList_[index]->setObject(object);
+        bmtItemList_[index]->setDestination(destination);
+    }
 }
 
 void BMTTask::updateStartPosition(QString start){
@@ -260,7 +266,7 @@ QString BMTTask::generateBMTTaskSpec(int numOfObjcetsToTransport){
     QList<QString> sources;
     QList<QString> objects;
     QList<QString> destinations;
-    QString destinationType;
+//    QString destinationType;
 
     QList<int> rdmInts;
     QList<int> rdmIntsAreasPlace;
@@ -309,44 +315,231 @@ QString BMTTask::generateBMTTaskSpec(int numOfObjcetsToTransport){
             }
         }
 
+        for(int c = 0; c < numOfObjcetsToTransport; ++c){
 
+            doAddItem(new BMTItem(sources[c], "", objects[c], destinations[rdmIntsAreasPlace[c]], "line" ));
+            //TODO: make destinationType selectable
+            startPos_ = sources[c];
+            endPos_ = destinations[rdmIntsAreasPlace[c]];
+        }
+    }
+
+    return composeBMTTaskSpec();
+}
+
+QString BMTTask::generateBTTTaskSpec(int numOfObjcetsToTransport){
+    clearList();
+
+    QList<ArenaPlace*> setup = arena_->getArenaSetup();
+    int numObjects = arena_->numberObjectsArena();
+    int numOfPutPlces = arena_->numberOfPlaceAreas();
+
+    QList<QString> sources;
+    QList<QString> objects;
+    QList<QString> destinations;
+//    QString destinationType;
+
+    QList<int> rdmInts;
+    QList<int> rdmIntsAreasPlace;
+
+
+    if(numOfObjcetsToTransport < numObjects){
+        while (rdmInts.length() < numOfObjcetsToTransport){
+
+            int rdmInt = rand() % numObjects;
+            if(!rdmInts.contains(rdmInt)){
+                rdmInts.append(rdmInt);
+            }
+
+        }
+
+        qSort(rdmInts);
+
+
+        while (rdmIntsAreasPlace.length() < numOfObjcetsToTransport){
+
+            int rdmInt = rand() % numOfPutPlces;
+            if(!rdmIntsAreasPlace.contains(rdmInt)){
+                rdmIntsAreasPlace.append(rdmInt);
+            }
+
+        }
+
+        qSort(rdmIntsAreasPlace);
+
+        int obCount = 0;
+        int currentRdmIndex = 0;
+        foreach(ArenaPlace* ap, setup){
+
+            if(ap->getPutDown()){
+                destinations.append(ap->getPlace());
+            }
+
+            foreach (ArenaObject* ob, ap->getObjects()) {
+                if(currentRdmIndex < numOfObjcetsToTransport && obCount == rdmInts[currentRdmIndex]){
+                    sources.append(ap->getPlace());
+                    objects.append(ob->object());
+                    ++currentRdmIndex;
+                }
+
+                ++obCount;
+            }
+        }
 
         for(int c = 0; c < numOfObjcetsToTransport; ++c){
 
             doAddItem(new BMTItem(sources[c], "", objects[c], destinations[rdmIntsAreasPlace[c]], "line" ));
-
             //TODO: make destinationType selectable
+            startPos_ = sources[c];
+            endPos_ = destinations[rdmIntsAreasPlace[c]];
+        }
+    }
+
+    return composeBTTTaskSpec();
+
+}
+
+QString BMTTask::generateCBTTaskSpec(int numOfObjcetsToTransport){
+    clearList();
+
+    QList<ArenaPlace*> setup = arena_->getArenaSetup();
+    int numObjects = arena_->numberObjectsArena();
+    int numOfPutPlces = arena_->numberOfPlaceAreas();
+
+    QList<QString> sources;
+    QList<QString> objects;
+    QList<QString> destinations;
+//    QString destinationType;
+
+    QList<int> rdmInts;
+    QList<int> rdmIntsAreasPlace;
+
+
+    if(numOfObjcetsToTransport < numObjects){
+        while (rdmInts.length() < numOfObjcetsToTransport){
+
+            int rdmInt = rand() % numObjects;
+            if(!rdmInts.contains(rdmInt)){
+                rdmInts.append(rdmInt);
+            }
 
         }
 
+        qSort(rdmInts);
 
 
+        while (rdmIntsAreasPlace.length() < numOfObjcetsToTransport){
 
+            int rdmInt = rand() % numOfPutPlces;
+            if(!rdmIntsAreasPlace.contains(rdmInt)){
+                rdmIntsAreasPlace.append(rdmInt);
+            }
 
+        }
 
+        qSort(rdmIntsAreasPlace);
 
+        int obCount = 0;
+        int currentRdmIndex = 0;
+        foreach(ArenaPlace* ap, setup){
 
+            if(ap->getPutDown()){
+                destinations.append(ap->getPlace());
+            }
 
+            foreach (ArenaObject* ob, ap->getObjects()) {
+                if(currentRdmIndex < numOfObjcetsToTransport && obCount == rdmInts[currentRdmIndex]){
+                    sources.append(ap->getPlace());
+                    objects.append(ob->object());
+                    ++currentRdmIndex;
+                }
+
+                ++obCount;
+            }
+        }
+
+        for(int c = 0; c < numOfObjcetsToTransport; ++c){
+
+            doAddItem(new BMTItem(sources[c], "", objects[c], destinations[rdmIntsAreasPlace[c]], "line" ));
+            //TODO: make destinationType selectable
+            startPos_ = sources[c];
+            endPos_ = destinations[rdmIntsAreasPlace[c]];
+        }
     }
 
-
-    return composeBMTTaskSpec();
-
+    return composeCBTTaskSpec();
 
 }
 
-QString BMTTask::generateBTTTaskSpec(){
+QString BMTTask::generatePPTTaskSpec(int numOfObjcetsToTransport){
+    clearList();
+
+    QList<ArenaPlace*> setup = arena_->getArenaSetup();
+    int numObjects = arena_->numberObjectsArena();
+    int numOfPutPlces = arena_->numberOfPlaceAreas();
+
+    QList<QString> sources;
+    QList<QString> objects;
+    QList<QString> destinations;
+//    QString destinationType;
+
+    QList<int> rdmInts;
+    QList<int> rdmIntsAreasPlace;
 
 
-}
+    if(numOfObjcetsToTransport < numObjects){
+        while (rdmInts.length() < numOfObjcetsToTransport){
 
-QString BMTTask::generateCBTTaskSpec(){
+            int rdmInt = rand() % numObjects;
+            if(!rdmInts.contains(rdmInt)){
+                rdmInts.append(rdmInt);
+            }
+
+        }
+
+        qSort(rdmInts);
 
 
-}
+        while (rdmIntsAreasPlace.length() < numOfObjcetsToTransport){
 
-QString BMTTask::generatePPTTaskSpec(){
+            int rdmInt = rand() % numOfPutPlces;
+            if(!rdmIntsAreasPlace.contains(rdmInt)){
+                rdmIntsAreasPlace.append(rdmInt);
+            }
 
+        }
+
+        qSort(rdmIntsAreasPlace);
+
+        int obCount = 0;
+        int currentRdmIndex = 0;
+        foreach(ArenaPlace* ap, setup){
+
+            if(ap->getPutDown()){
+                destinations.append(ap->getPlace());
+            }
+
+            foreach (ArenaObject* ob, ap->getObjects()) {
+                if(currentRdmIndex < numOfObjcetsToTransport && obCount == rdmInts[currentRdmIndex]){
+                    sources.append(ap->getPlace());
+                    objects.append(ob->object());
+                    ++currentRdmIndex;
+                }
+
+                ++obCount;
+            }
+        }
+
+        for(int c = 0; c < numOfObjcetsToTransport; ++c){
+
+            doAddItem(new BMTItem(sources[c], "", objects[c], destinations[rdmIntsAreasPlace[c]], "line" ));
+            //TODO: make destinationType selectable
+            startPos_ = sources[c];
+            endPos_ = destinations[rdmIntsAreasPlace[c]];
+        }
+    }
+
+    return composePPTTaskSpec();
 }
 
 
@@ -388,4 +581,55 @@ void BMTTask::clearList(){
     qDeleteAll(bmtItemList_);
     bmtItemList_.clear();
     endResetModel();
+}
+
+
+int BMTTask::getItemObjectIndex(int index, QList<QString> objects){
+    if( index < bmtItemList_.length() && index >= 0){
+        return objects.indexOf(bmtItemList_[index]->object());
+    } else {
+        return -1;
+    }
+}
+
+int BMTTask::getItemSourceTypeIndex(int index, QList<QString> sourceTypes){
+    if( index < bmtItemList_.length() && index >= 0){
+        return sourceTypes.indexOf(bmtItemList_[index]->sourceType());
+    } else {
+        return -1;
+    }
+}
+
+int BMTTask::getItemSourceIndex(int index, QList<QString> sources){
+    if( index < bmtItemList_.length() && index >= 0){
+        return sources.indexOf(bmtItemList_[index]->source());
+    } else {
+        return -1;
+    }
+}
+
+int BMTTask::getItemDestinationIndex(int index, QList<QString> destinations){
+    if( index < bmtItemList_.length() && index >= 0){
+        return destinations.indexOf(bmtItemList_[index]->destination());
+    } else {
+        return -1;
+    }
+}
+
+int BMTTask::getItemDestinationTypeIndex(int index, QList<QString> destinationTypes){
+    if( index < bmtItemList_.length() && index >= 0){
+        return destinationTypes.indexOf(bmtItemList_[index]->desitnationType());
+    } else {
+        return -1;
+    }
+}
+
+int BMTTask::getItemStartPos(QList<QString> positions){
+    qDebug() << startPos_ <<  positions.indexOf(startPos_);
+    return positions.indexOf(startPos_);
+}
+
+
+int BMTTask::getItemEndPos(QList<QString> positions){
+    return positions.indexOf(endPos_);
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<teams>
+    <team>
+        <name>LUHbots</name>
+        <teamID>1</teamID>
+    </team>
+
+    <team>
+        <name>WF Wolves</name>
+        <teamID>2</teamID>
+    </team>
+
+    <team>
+        <name>b-it-bots</name>
+        <teamID>3</teamID>
+    </team>
+
+    <team>
+        <name>smartlab@work</name>
+        <teamID>4</teamID>
+    </team>
+
+    <team>
+        <name>Team Epheusus</name>
+        <teamID>5</teamID>
+    </team>
+
+    <team>
+        <name>LRT</name>
+        <teamID>6</teamID>
+    </team>
+
+</teams>

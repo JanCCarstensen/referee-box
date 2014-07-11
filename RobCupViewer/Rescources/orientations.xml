@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<orientations>
+    <orientation>
+        <name>N</name>
+    </orientation>
+
+    <orientation>
+        <name>O</name>
+    </orientation>
+
+    <orientation>
+        <name>S</name>
+    </orientation>
+
+    <orientation>
+        <name>W</name>
+    </orientation>
+
+</orientations>

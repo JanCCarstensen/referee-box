@@ -24,4 +24,5 @@ Networking::~Networking(){
 
 void Networking::sendTaskSpec(QString taskSpec){
     tcpserver_->sendTaskSpec(taskSpec);
+    udpserver_->sendTaskSepc(taskSpec);
 }

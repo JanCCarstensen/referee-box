@@ -13,7 +13,9 @@ Item {
         ComboBox {
             id: comboObject
 
-            currentIndex: bmtTaskList.getItemPlaceIndex(index, objectsModel.convertToListSingle())
+//            onSt
+
+            currentIndex: bmtTaskList.getItemObjectIndex(index, objectsModelData.convertToListSingle())
 
             editable: true
             model: objectsModel

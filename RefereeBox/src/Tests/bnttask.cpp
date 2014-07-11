@@ -181,3 +181,5 @@ QHash<int, QByteArray> BNTTask::roleNames() const {
     roles[OrientationRole] = "orientation";
     return roles;
 }
+
+

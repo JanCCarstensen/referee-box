@@ -50,9 +50,9 @@ public slots:
     QString composePPTTaskSpec();
 
     QString generateBMTTaskSpec(int numOfSamples);
-    QString generateBTTTaskSpec();
-    QString generateCBTTaskSpec();
-    QString generatePPTTaskSpec();
+    QString generateBTTTaskSpec(int numOfObjcetsToTransport);
+    QString generateCBTTaskSpec(int numOfObjcetsToTransport);
+    QString generatePPTTaskSpec(int numOfObjcetsToTransport);
 
     void updateData(int index, QString source, QString sourceType, QString object, QString destination, QString destinationType);
     void updateObect(int index, QString object);
@@ -65,6 +65,15 @@ public slots:
 
     void updateStartPosition(QString start);
     void updateEndPosition(QString end);
+
+    int getItemObjectIndex(int index, QList<QString> objects);
+    int getItemSourceTypeIndex(int index, QList<QString> sourceTypes);
+    int getItemSourceIndex(int index, QList<QString> sources);
+    int getItemDestinationIndex(int index, QList<QString> destinations);
+    int getItemDestinationTypeIndex(int index, QList<QString> destinationTypes);
+
+    int getItemStartPos(QList<QString> positions);
+    int getItemEndPos(QList<QString> positions);
 
 private slots:
 

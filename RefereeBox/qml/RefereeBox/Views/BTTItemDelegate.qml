@@ -6,8 +6,8 @@ Item {
 
     id: bttItemDelegate
 
-    property XmlListModel objectsModel;
-    property XmlListModel placesModel;
+    property ListModel objectsModel;
+    property ListModel placesModel;
 
     Row {
         spacing: 10
@@ -16,6 +16,8 @@ Item {
             id: comboSource
             editable: true
             model: placesModel
+
+            currentIndex: bttTaskList.getItemSourceIndex(index, placesModelData.convertToListPlaces())
 
             onEditTextChanged: bttTaskList.updateObect(index, comboSource.editText, comboObject.editText, comboDestination.editText)
          }
@@ -26,14 +28,19 @@ Item {
             editable: true
             model: objectsModel
 
+            currentIndex: bttTaskList.getItemObjectIndex(index, objectsModelData.convertToListSingle())
+
             onEditTextChanged: bttTaskList.updateObect(index, comboSource.editText, comboObject.editText, comboDestination.editText)
          }
 
         ComboBox {
             id: comboDestination
 
+
+
             editable: true
             model: placesModel
+            currentIndex: bttTaskList.getItemDestinationIndex(index, placesModelData.convertToListPlaces())
 
             onEditTextChanged: bttTaskList.updateObect(index, comboSource.editText, comboObject.editText, comboDestination.editText)
          }

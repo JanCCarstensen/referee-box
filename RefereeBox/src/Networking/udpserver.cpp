@@ -22,7 +22,6 @@ void UDPServer::run(){
 }
 
 void UDPServer::readPendingDatagrams(){
-    qDebug() << "incomming";
     while (udpSocket->hasPendingDatagrams()) {
         QByteArray datagram;
         datagram.resize(udpSocket->pendingDatagramSize());
@@ -34,7 +33,6 @@ void UDPServer::readPendingDatagrams(){
 
         qDebug() << "[" << sender.toString() << ":" << senderPort << "]" << datagram.data();
     }
-//    qDebug() << udpSocket->readAll();
 }
 
 

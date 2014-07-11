@@ -24,7 +24,7 @@ Item {
             ComboBox {
                 id: comboStart
                 editable: true
-                model: placesModelData
+                model: placesModelData.convertToListPlaces()
                 onEditTextChanged: cbtTaskList.updateStartPosition(comboStart.editText)
             }
         }
@@ -35,10 +35,26 @@ Item {
         Button{
             anchors.top: scoureRow.bottom
             text: "Compose"
+            id: compose
 
             onClicked: {
 
                newText(cbtTaskList.composeCBTTaskSpec())
+
+
+            }
+
+        }
+
+
+        Button{
+            anchors.top: compose.bottom
+            text: "Auto generate"
+
+            onClicked: {
+
+               newText(cbtTaskList.generateCBTTaskSpec(1))
+               comboStart.currentIndex = cbtTaskList.getItemStartPos(placesModelData.convertToListPlaces())
 
 
             }
