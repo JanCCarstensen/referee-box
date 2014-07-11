@@ -8,10 +8,10 @@ Install:
 
 2) Compile
 
-git clone https://github.com/JanCCarstensen/referee-box.git 
-cd referee-box/RefereeBox
-qmake
-make
+git clone https://github.com/JanCCarstensen/referee-box.git /n
+cd referee-box/RefereeBox \n
+qmake\n
+make\n
 
 3) Execute
 
