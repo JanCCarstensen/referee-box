@@ -125,8 +125,10 @@ Item {
             text: "Compose"
 
             onClicked: {
-
-               newText(bmtTaskList.composeBMTTaskSpec())
+                bmtTaskList.updateAllDestinationType(comboConfig.editText)
+                bmtTaskList.updateAllSource(comboSource.editText)
+                bmtTaskList.updateAllDestination(comboDestination.editText)
+                newText(bmtTaskList.composeBMTTaskSpec())
 
 
             }

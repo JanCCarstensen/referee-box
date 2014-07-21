@@ -14,6 +14,7 @@ Item {
 
     ListView{
 
+
         id: bttTaskView
         spacing: 30
         snapMode: ListView.SnapOneItem
@@ -33,7 +34,9 @@ Item {
         delegate: BTTItemDelegate{
             objectsModel: objectsModelData.modelid
             placesModel: placesModelData.modelid
+
         }
+
 
         model: bttTaskList
 
@@ -98,8 +101,13 @@ Item {
             text: "Compose"
 
             onClicked: {
+                bttTaskList.updateStartPosition(comboStart.editText)
+                bttTaskList.updateEndPosition(comboEnd.editText)
 
-               newText(bttTaskList.composeBTTTaskSpec())
+                console.log("click")
+
+
+                newText(bttTaskList.composeBTTTaskSpec())
 
 
             }

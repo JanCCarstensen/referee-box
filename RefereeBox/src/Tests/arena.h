@@ -54,6 +54,8 @@ public slots:
     int getObjectCount(QString place);
     QString getConfiguration(QString place);
 
+
+
 private:
 
 

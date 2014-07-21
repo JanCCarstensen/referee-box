@@ -17,6 +17,7 @@ Item {
             editable: true
             model: placesModel
 
+
             currentIndex: bttTaskList.getItemSourceIndex(index, placesModelData.convertToListPlaces())
 
             onEditTextChanged: bttTaskList.updateObect(index, comboSource.editText, comboObject.editText, comboDestination.editText)

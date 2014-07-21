@@ -88,7 +88,7 @@ void BMTTask::updateAllDestinationType(QString destinationType){
 }
 
 void BMTTask::updateObect(int index, QString source, QString object, QString destination){
-    if(index > 0){
+    if(index >= 0){
         bmtItemList_[index]->setSource(source);
         bmtItemList_[index]->setObject(object);
         bmtItemList_[index]->setDestination(destination);

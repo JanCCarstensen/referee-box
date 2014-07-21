@@ -13,8 +13,6 @@ Item {
         ComboBox {
             id: comboObject
 
-//            onSt
-
             currentIndex: bmtTaskList.getItemObjectIndex(index, objectsModelData.convertToListSingle())
 
             editable: true

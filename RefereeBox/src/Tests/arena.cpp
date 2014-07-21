@@ -2,6 +2,9 @@
 #include <cstdlib>
 
 #include <QDebug>
+
+#include <QtPrintSupport/QPrinter>
+#include <QtPrintSupport/QPrintDialog>
 #include <QJsonArray>
 
 
@@ -198,3 +201,4 @@ QList<ArenaPlace*> Arena::getArenaSetup(){
 int Arena::numberOfPlaceAreas() const {
     return numberOfPlaceAreas_;
 }
+
