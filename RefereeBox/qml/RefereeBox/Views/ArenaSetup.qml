@@ -231,7 +231,7 @@ Rectangle {
 
 
             onClicked: {
-                arena.generateArenaSetup(placesModelData.convertToList(), objectsModelData.convertToList(), configurationModelData.convertToList(), rotationsModelData.convertToList(), itemOrientationsModelData.convertToList(), 3)
+                arena.generateArenaSetup(placesModelData.convertToList(), objectsModelData.convertToList(), configurationModelData.convertToList(), rotationsModelData.convertToList(), itemOrientationsModelData.convertToList(), 5)
             }
 
         }

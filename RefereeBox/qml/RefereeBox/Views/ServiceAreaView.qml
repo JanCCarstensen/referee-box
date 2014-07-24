@@ -17,7 +17,7 @@ Rectangle {
 
     function setObjectsModel(objectsList, orientationsList, rotationsList){
 
-        var items = [firstItem,secondItem,thirdItem];
+        var items = [firstItem,secondItem,thirdItem, fourthItem, fithItem];
 
         for (var it = 0; it < objectsList.length; it++) {
             objectsData.append({"object":objectsList[it], "orientation":orientationsList[it],"rotation":rotationsList[it]});
@@ -33,7 +33,7 @@ Rectangle {
 
 
 
-    width: 200
+    width: 400
     height: 120
 
     border.width: 3
@@ -42,11 +42,11 @@ Rectangle {
     Column{
 
         anchors.fill: parent
-        spacing: 10
+        spacing: 20
 
         Row{
 
-            spacing: 20
+            spacing: 40
             anchors.horizontalCenter:  parent.horizontalCenter
 
             Text{
@@ -75,7 +75,7 @@ Rectangle {
 
         Row{
 
-            x: 10
+            x: 20
 
             Column{
 
@@ -83,7 +83,7 @@ Rectangle {
                 visible: false
 
                 height: 70
-                width: 60
+                width: 80
 
                 property string object: "";
                 property string orientation: "";
@@ -104,14 +104,6 @@ Rectangle {
                     text: firstItem.object
 
                 }
-//                Text{
-//                    text: firstItem.orientation
-
-//                }
-//                Text{
-//                    text: firstItem.rotation
-
-//                }
             }
 
             Column{
@@ -120,7 +112,7 @@ Rectangle {
                 visible: false
 
                 height: 70
-                width: 60
+                width: 80
 
                 property string object: "";
                 property string orientation: "";
@@ -140,14 +132,6 @@ Rectangle {
                     text: secondItem.object
 
                 }
-//                Text{
-//                    text: secondItem.orientation
-
-//                }
-//                Text{
-//                    text: secondItem.rotation
-
-//                }
             }
 
             Column{
@@ -156,7 +140,7 @@ Rectangle {
                 visible: false
 
                 height: 70
-                width: 60
+                width: 80
 
                 property string object: "";
                 property string orientation: "";
@@ -175,14 +159,58 @@ Rectangle {
                     text: thirdItem.object
 
                 }
-//                Text{
-//                    text: thirdItem.orientation
+            }
+            Column{
 
-//                }
-//                Text{
-//                    text: thirdItem.rotation
+                id: fourthItem
+                visible: false
 
-//                }
+                height: 70
+                width: 80
+
+                property string object: "";
+                property string orientation: "";
+                property int rotation: 0;
+                property string objectPath: "";
+
+                Image {
+                    height: 60
+                    width: 60
+                    fillMode: Image.PreserveAspectFit
+                    source: fourthItem.objectPath
+                    transform: Rotation { origin.x: 30; origin.y: 30; angle: fourthItem.rotation}
+
+                }
+                Text{
+                    text: fourthItem.object
+
+                }
+            }
+            Column{
+
+                id: fithItem
+                visible: false
+
+                height: 70
+                width: 80
+
+                property string object: "";
+                property string orientation: "";
+                property int rotation: 0;
+                property string objectPath: "";
+
+                Image {
+                    height: 60
+                    width: 60
+                    fillMode: Image.PreserveAspectFit
+                    source: fithItem.objectPath
+                    transform: Rotation { origin.x: 30; origin.y: 30; angle: fithItem.rotation}
+
+                }
+                Text{
+                    text: fithItem.object
+
+                }
             }
         }
     }

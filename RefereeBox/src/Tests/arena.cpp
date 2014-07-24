@@ -64,9 +64,10 @@ void Arena::generateArenaSetup(QList<QVariant> places, QList<QString> objects, Q
                     currentPlace->append(currentObject);
                     ++numberObjectsArena_;
                 }
+                addItem(currentPlace);
             }
 
-            addItem(currentPlace);
+
         }
 
         QJsonObject arenaSpec;

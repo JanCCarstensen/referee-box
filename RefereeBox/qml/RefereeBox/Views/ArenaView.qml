@@ -30,7 +30,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.topMargin: 0
 
-        cellWidth: 240;
+        cellWidth: 450;
         cellHeight: 130
 
 
