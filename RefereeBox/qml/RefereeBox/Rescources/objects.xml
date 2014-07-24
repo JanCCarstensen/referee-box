@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <objects>
     <object>
-        <name>F_20_B</name>
+        <name>F20_20_B</name>
         <active>true</active>
         <quantity>2</quantity>
     </object>
 
     <object>
-        <name>F_20_G</name>
+        <name>F20_20_G</name>
         <active>true</active>
         <quantity>2</quantity>
     </object>
 
     <object>
-        <name>S_40_B</name>
+        <name>S40_40_B</name>
         <active>true</active>
         <quantity>2</quantity>
     </object>
 
     <object>
-        <name>S_40_G</name>
+        <name>S40_40_G</name>
         <active>true</active>
         <quantity>2</quantity>
     </object>
 
     <object>
-        <name>R_20</name>
+        <name>R20</name>
         <active>true</active>
         <quantity>2</quantity>
     </object>
 
     <object>
-        <name>V_20</name>
+        <name>V20</name>
         <active>true</active>
         <quantity>2</quantity>
     </object>
 
     <object>
-        <name>M_20</name>
+        <name>M20</name>
         <active>true</active>
         <quantity>2</quantity>
     </object>
 
     <object>
-        <name>M_30</name>
+        <name>M30</name>
         <active>true</active>
         <quantity>2</quantity>
     </object>
 
     <object>
-        <name>M_20_100</name>
+        <name>M20_100</name>
         <active>true</active>
         <quantity>2</quantity>
     </object>

@@ -1,70 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <places>
     <place>
-        <name>S1</name>
+        <name>S11</name>
         <navigation>true</navigation>
         <pickup>true</pickup>
         <putdown>true</putdown>
     </place>
 
     <place>
-        <name>S2</name>
+        <name>S12</name>
         <navigation>true</navigation>
         <pickup>true</pickup>
         <putdown>true</putdown>
     </place>
 
     <place>
-        <name>S3</name>
+        <name>S13</name>
         <navigation>true</navigation>
         <pickup>true</pickup>
         <putdown>true</putdown>
     </place>
 
     <place>
-        <name>S4</name>
+        <name>S14</name>
         <navigation>true</navigation>
         <pickup>true</pickup>
         <putdown>true</putdown>
     </place>
 
     <place>
-        <name>A1</name>
+        <name>S15</name>
         <navigation>true</navigation>
         <pickup>true</pickup>
         <putdown>true</putdown>
     </place>
 
     <place>
-        <name>A2</name>
+        <name>S16</name>
         <navigation>true</navigation>
         <pickup>true</pickup>
         <putdown>true</putdown>
     </place>
 
     <place>
-        <name>T1</name>
+        <name>S17</name>
         <navigation>true</navigation>
         <pickup>true</pickup>
         <putdown>true</putdown>
     </place>
 
     <place>
-        <name>C1</name>
+        <name>T11</name>
         <navigation>true</navigation>
         <pickup>true</pickup>
         <putdown>true</putdown>
     </place>
 
     <place>
-        <name>C2</name>
+        <name>T12</name>
         <navigation>true</navigation>
         <pickup>true</pickup>
         <putdown>true</putdown>
     </place>
 
     <place>
-        <name>C3</name>
+        <name>T13</name>
         <navigation>true</navigation>
         <pickup>true</pickup>
         <putdown>true</putdown>

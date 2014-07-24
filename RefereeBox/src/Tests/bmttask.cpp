@@ -343,7 +343,7 @@ QString BMTTask::generateBTTTaskSpec(int numOfObjcetsToTransport){
     QList<int> rdmIntsAreasPlace;
 
 
-    if(numOfObjcetsToTransport < numObjects){
+    if(numOfObjcetsToTransport <= numObjects){
         while (rdmInts.length() < numOfObjcetsToTransport){
 
             int rdmInt = rand() % numObjects;
@@ -359,9 +359,8 @@ QString BMTTask::generateBTTTaskSpec(int numOfObjcetsToTransport){
         while (rdmIntsAreasPlace.length() < numOfObjcetsToTransport){
 
             int rdmInt = rand() % numOfPutPlces;
-            if(!rdmIntsAreasPlace.contains(rdmInt)){
-                rdmIntsAreasPlace.append(rdmInt);
-            }
+            rdmIntsAreasPlace.append(rdmInt);
+
 
         }
 
